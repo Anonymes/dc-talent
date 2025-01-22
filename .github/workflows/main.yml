@@ -1,0 +1,33 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main  # Pilih branch mana yang akan memicu deploy, biasanya main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Langkah untuk mem-checkout kode Anda
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Langkah untuk setup Node.js (atau setup sesuai kebutuhan Anda)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # Langkah untuk set environment variables dari GitHub Secrets
+      - name: Set up Bot Token
+        run: echo "DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}" >> $GITHUB_ENV
+
+      # Langkah untuk install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Langkah untuk menjalankan aplikasi atau deploy
+      - name: Deploy to Railway
+        run: npm run deploy  # Atau sesuaikan dengan script deploy yang Anda miliki
