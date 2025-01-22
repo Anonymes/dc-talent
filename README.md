@@ -1,1 +1,1 @@
-# dc-talent
+# dc-talent"# discord-talent" 
